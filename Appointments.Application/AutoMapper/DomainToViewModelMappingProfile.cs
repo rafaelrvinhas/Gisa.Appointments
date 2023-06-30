@@ -16,7 +16,10 @@ namespace Appointments.Application.AutoMapper
         {
             CreateMap<Service, ServiceViewModel>();
             CreateMap<AssociatePlanInfo, AssociatePlanInfoViewModel>();
-            CreateMap<Appointment, NewAppointmentRequestViewModel>();
+            CreateMap<Appointment, AppointmentViewModel>();
+            CreateMap<Partner, PartnerViewModel>();
+            CreateMap<Provider, ProviderViewModel>();
+            CreateMap<Specialty, SpecialtyViewModel>();
         }
     }
 }

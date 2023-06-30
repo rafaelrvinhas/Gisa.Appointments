@@ -13,9 +13,9 @@ namespace Appointments.Domain.Commands.Appointment
         public EAppointmentStatus Status { get; set; }
         public int AssociateId { get; set; }
         public int PartnerId { get; set; }
-        public int ProviderId { get; set; }
+        public int? ProviderId { get; set; }
+        public int ServiceTypeId { get; set; }
         public int ServiceId { get; set; }
-        public DateTime Date { get; set; }
-        public DateTime Time { get; set; }
+        public DateTime DateAndTime { get; set; }
     }
 }

@@ -15,17 +15,12 @@ namespace Appointments.Infra.Data.Repository
         public PartnerRepository(AppointmentContext context) : base(context)
         { }
 
-        public IEnumerable<Partner> GetPartnersByService(int serviceId, int planClassificationId, int planOptionId)
+        public IEnumerable<Partner> GetPartners(int planClassificationId, int planOptionId)
         {
             return DbSet.AsNoTracking().ToList()
                 .Where(p =>
                     (int)p.PlanClassification == planClassificationId &&
                     (int)p.PlanOption == planOptionId);
-        }
-
-        public IEnumerable<Partner> GetPartnersBySpecialty(int specialtyId, int planClassificationId, int planOptionId)
-        {
-            throw new NotImplementedException();
         }
     }
 }

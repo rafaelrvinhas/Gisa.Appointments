@@ -9,7 +9,8 @@ namespace Appointments.Domain.Interfaces
 {
     public interface IAppointmentRepository : IRepository<Appointment>
     {
-        IEnumerable<Appointment> GetProviderAppointments(int providerId);
-        IEnumerable<Appointment> GetServiceAppointments(int serviceId, int partnerId);
+        bool GetProviderAppointments(int? providerId, DateTime dateAndTime);
+        bool GetServiceAppointments(int? serviceId, int partnerId, DateTime dateAndTime);
+        IEnumerable<Appointment> GetAppointments(int associateId);
     }
 }

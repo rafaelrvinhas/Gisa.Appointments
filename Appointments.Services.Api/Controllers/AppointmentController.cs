@@ -5,6 +5,7 @@ using Appointments.Domain.Core.Notifications;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Appointments.Services.Api.Controllers
@@ -29,8 +30,25 @@ namespace Appointments.Services.Api.Controllers
         {
             var userData = GetUserData();
 
+            newAppointmentRequestViewModel.SetDateAndTime();
+
             _appointmentAppService.RequestNewAppointment(newAppointmentRequestViewModel, userData.AssociateId);
             return Ok();
+        }
+
+        [HttpGet]
+        [Route("historico")]
+        public IActionResult Get([FromQuery(Name = "id_associado")]int associateId)
+        {
+            var appointments = _appointmentAppService.GetAppointments(associateId);
+            return Ok(appointments);
+        }
+
+        [HttpPut]
+        [Route("atualiza")]
+        public IActionResult Put([FromQuery(Name = "id_agendamento")]int appointmentId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -30,9 +30,10 @@ namespace Appointments.Application.ViewModels.Responses
             }
         }
 
-        [JsonPropertyName("service_duration_time")]
+        [JsonPropertyName("tempo_servico")]
         public int ServiceDurationTime { get; set; }
 
+        [JsonIgnore]
         public IEnumerable<PartnerServiceViewModel> PartnerServices { get; set; }
     }
 }

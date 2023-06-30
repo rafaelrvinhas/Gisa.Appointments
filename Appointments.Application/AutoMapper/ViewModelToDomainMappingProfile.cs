@@ -29,10 +29,9 @@ namespace Appointments.Application.AutoMapper
                     a.AssociateId,
                     a.PartnerId,
                     a.ProviderId,
+                    a.ServiceTypeId,
                     a.ServiceId,
-                    //a.Status,
-                    a.Date,
-                    a.Time));
+                    a.DateAndTime));
         }
     }
 }

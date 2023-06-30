@@ -11,6 +11,9 @@ namespace Appointments.Domain.Models
     [Table(name: "AssociatePlanInfo", Schema = "dbo")]
     public class AssociatePlanInfo
     {
+        public AssociatePlanInfo()
+        { }
+
         public AssociatePlanInfo(
             int associateId, 
             int planId, 

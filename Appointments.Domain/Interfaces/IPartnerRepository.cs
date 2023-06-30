@@ -9,7 +9,6 @@ namespace Appointments.Domain.Interfaces
 {
     public interface IPartnerRepository : IRepository<Partner>
     {
-        IEnumerable<Partner> GetPartnersByService(int serviceId, int planClassificationId, int planOptionId);
-        IEnumerable<Partner> GetPartnersBySpecialty(int specialtyId, int planClassificationId, int planOptionId);
+        IEnumerable<Partner> GetPartners(int planClassificationId, int planOptionId);
     }
 }

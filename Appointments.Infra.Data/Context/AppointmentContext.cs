@@ -40,12 +40,21 @@ namespace Appointments.Infra.Data.Context
 
             modelBuilder.Entity<PartnerService>()
                 .HasOne(ps => ps.Service)
-                .WithMany(ps => ps.PartnerServices)
+                .WithMany(ps => ps.ServicePartners)
                 .HasForeignKey(ps => ps.PartnerId);
 
             modelBuilder.Entity<PartnerSpecialty>().ToTable("PartnerSpecialty");
             modelBuilder.Entity<PartnerSpecialty>().HasKey(ps => new { ps.PartnerId, ps.SpecialtyId });
-            
+
+            modelBuilder.Entity<PartnerSpecialty>()
+                .HasOne(ps => ps.Partner)
+                .WithMany(ps => ps.PartnerSpecialties)
+                .HasForeignKey(ps => ps.SpecialtyId);
+
+            modelBuilder.Entity<PartnerSpecialty>()
+                .HasOne(ps => ps.Specialty)
+                .WithMany(ps => ps.SpecialtyPartners)
+                .HasForeignKey(ps => ps.PartnerId);
 
             base.OnModelCreating(modelBuilder);
         }

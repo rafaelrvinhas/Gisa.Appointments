@@ -11,7 +11,7 @@ namespace Appointments.Application.ViewModels.Responses
 {
     public class SpecialtyViewModel : PlanLevelViewModel
     {
-        [JsonIgnore]
+        [JsonPropertyName("id")]
         public int Id { get; set; }
 
         [JsonPropertyName("nome")]

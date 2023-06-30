@@ -1,5 +1,6 @@
 ﻿using Appointments.Application.Interfaces;
 using Appointments.Application.ViewModels.Requests;
+using Appointments.Application.ViewModels.Responses;
 using Appointments.Domain.Commands.Appointment;
 using Appointments.Domain.Core.Bus;
 using Appointments.Domain.Interfaces;
@@ -34,14 +35,19 @@ namespace Appointments.Application.Services
             GC.SuppressFinalize(this);
         }
 
-        public IEnumerable<Appointment> GetProviderAppointments(int providerId)
+        public IEnumerable<AppointmentViewModel> GetProviderAppointments(int providerId)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Appointment> GetServiceAppointments(int serviceId, int partnerId)
+        public IEnumerable<AppointmentViewModel> GetServiceAppointments(int serviceId, int partnerId)
         {
             throw new NotImplementedException();
+        }
+
+        public IEnumerable<AppointmentViewModel> GetAppointments(int associateId)
+        {
+            return _mapper.Map<IEnumerable<AppointmentViewModel>>(_appointmentRepository.GetAppointments(associateId));
         }
 
         public async void RequestNewAppointment(NewAppointmentRequestViewModel newAppointmentRequest, int associateId)

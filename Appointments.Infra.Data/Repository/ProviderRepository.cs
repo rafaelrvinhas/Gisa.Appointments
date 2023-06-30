@@ -1,6 +1,7 @@
 ﻿using Appointments.Domain.Interfaces;
 using Appointments.Domain.Models;
 using Appointments.Infra.Data.Context;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,12 +17,24 @@ namespace Appointments.Infra.Data.Repository
 
         public IEnumerable<Provider> GetProvidersByPartner(int partnerId, int planClassificationId, int planOptionId)
         {
-            throw new NotImplementedException();
+            return DbSet.AsNoTracking()
+                .Where(p =>
+                    (int)p.PlanClassification == planClassificationId &&
+                    (int)p.PlanOption == planOptionId &&
+                    p.PartnerId == partnerId)
+                .Include(p => p.Specialty)
+                .ToList();
         }
 
         public IEnumerable<Provider> GetProvidersBySpecialty(int specialtyId, int planClassificationId, int planOptionId)
         {
-            throw new NotImplementedException();
+            return DbSet.AsNoTracking()
+                .Where(p => 
+                    (int)p.PlanClassification == planClassificationId &&
+                    (int)p.PlanOption == planOptionId &&
+                    p.SpecialtyId == specialtyId)
+                .Include(p => p.Specialty)
+                .ToList();
         }
     }
 }

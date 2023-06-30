@@ -1,6 +1,7 @@
 ﻿using Appointments.Domain.Commands.Appointment;
 using Appointments.Domain.Interfaces;
 using Appointments.Domain.Models;
+using Appointments.Domain.Models.Enums;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -26,10 +27,18 @@ namespace Appointments.Domain.CommandHandlers
                 message.PartnerId,
                 message.ProviderId,
                 message.ServiceId,
-                message.Date,
-                message.Time);
+                message.DateAndTime);
 
-            _appointmentRepository.Add(appointment);
+            if (message.ServiceTypeId == (int)EServiceType.Consultation)
+            {
+                if (_appointmentRepository.GetProviderAppointments(appointment.ProviderId, appointment.DateAndTime))
+                    _appointmentRepository.Add(appointment);
+            }
+            else
+            {
+                if (_appointmentRepository.GetServiceAppointments(appointment.ServiceId, appointment.PartnerId, appointment.DateAndTime))
+                    _appointmentRepository.Add(appointment);
+            }
 
             return Commit();
         }

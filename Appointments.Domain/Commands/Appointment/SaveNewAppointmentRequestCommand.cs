@@ -12,19 +12,17 @@ namespace Appointments.Domain.Commands.Appointment
         public SaveNewAppointmentRequestCommand(
             int associateId,
             int partnerId,
-            int providerId,
+            int? providerId,
+            int serviceTypeId,
             int serviceId,
-            //EAppointmentStatus status,
-            DateTime date,
-            DateTime time)
+            DateTime dateAndTime)
         {
             AssociateId = associateId;
             PartnerId = partnerId;
             ProviderId = providerId;
+            ServiceTypeId = serviceTypeId;
             ServiceId = serviceId;
-            //Status = status;
-            Date = date;
-            Time = time;
+            DateAndTime = dateAndTime;
         }
     }
 }

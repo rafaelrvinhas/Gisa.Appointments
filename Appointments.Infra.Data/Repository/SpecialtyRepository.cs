@@ -17,10 +17,11 @@ namespace Appointments.Infra.Data.Repository
 
         public IEnumerable<Specialty> GetSpecialties(int planClassificationId, int planOptionId)
         {
-            return DbSet.AsNoTracking().ToList()
+            return DbSet.AsNoTracking()
                 .Where(s =>
                     (int)s.PlanClassification == planClassificationId &&
-                    (int)s.PlanOption == planOptionId);
+                    (int)s.PlanOption == planOptionId)
+                .ToList();
         }
     }
 }

@@ -43,6 +43,9 @@ namespace Appointments.Infra.CrossCutting.IoC
             services.AddScoped<IServiceRepository, ServiceRepository>();
             services.AddScoped<IAssociatePlanInfoRepository, AssociatePlanInfoRepository>();
             services.AddScoped<IAppointmentRepository, AppointmentRepository>();
+            services.AddScoped<IPartnerRepository, PartnerRepository>();
+            services.AddScoped<IProviderRepository, ProviderRepository>();
+            services.AddScoped<ISpecialtyRepository, SpecialtyRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<AppointmentContext>();
         }

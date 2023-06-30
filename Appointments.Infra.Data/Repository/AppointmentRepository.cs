@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Appointments.Infra.Data.Repository
 {
@@ -16,21 +17,38 @@ namespace Appointments.Infra.Data.Repository
         public AppointmentRepository(AppointmentContext context) : base(context)
         { }
 
-        public IEnumerable<Appointment> GetProviderAppointments(int providerId)
+        public bool GetProviderAppointments(int? providerId, DateTime dateAndTime)
         {
-            return DbSet.AsNoTracking().ToList()
-                .Where(a => 
+            return DbSet.AsNoTracking()
+                .Where(a =>
                     a.ProviderId == providerId &&
-                    a.Status == EAppointmentStatus.Scheduled);
+                    a.DateAndTime == dateAndTime &&
+                    a.Status == EAppointmentStatus.Scheduled)
+                .ToList().Count == 0;
         }
 
-        public IEnumerable<Appointment> GetServiceAppointments(int serviceId, int partnerId)
+        public bool GetServiceAppointments(int? serviceId, int partnerId, DateTime dateAndTime)
         {
-            return DbSet.AsNoTracking().ToList()
+            return DbSet.AsNoTracking()
                 .Where(a =>
                     a.ServiceId == serviceId &&
                     a.PartnerId == partnerId &&
-                    a.Status == EAppointmentStatus.Scheduled);
+                    a.DateAndTime == dateAndTime &&
+                    a.Status == EAppointmentStatus.Scheduled)
+                .ToList().Count == 0;
+        }
+
+        public IEnumerable<Appointment> GetAppointments(int associateId)
+        {
+            return DbSet.AsNoTracking()
+                .Where(a => 
+                    a.AssociateId == associateId &&
+                    a.Status == EAppointmentStatus.Scheduled)
+                .Include(a => a.Partner)
+                .Include(a => a.Provider)
+                .Include(a => a.Provider.Specialty)
+                .Include(a => a.Service)
+                .ToList();
         }
     }
 }
